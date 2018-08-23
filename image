@@ -1,0 +1,70 @@
+#include <stdio.h>
+ 
+ 
+//This function makes the header file for the image
+void make_header(int width, int height)
+{
+  fprintf(stdout, "P6\n"); 
+  fprintf(stdout, "%d %d %d\n", width, height, 255); 
+}
+ 
+ 
+//The function prints the pixels on the screen
+void make_pixel (unsigned char r, unsigned char g, unsigned char b)
+{
+  fprintf(stdout, "%c%c%c", r, g, b);
+}
+ 
+ 
+/*the purpose of this function is to make a
+row of pixels from column start to column finish; yValue will provide the row number.*/
+void print_Row (int yValue, int width, int height)
+{
+  int x=0, m=(1/1), b=0;
+  yValue= ((width/2) + (height/2))-1;
+  int i;
+    for (i = 0; i < yValue; i++)
+    {
+      make_pixel(255,0,0);
+      b++;
+      x++;
+      yValue= m*x+b;
+    }
+    for (i = 0; i > yValue; i++)
+    {
+      make_pixel(0,0,255);
+      b++;
+      x++;
+      yValue= m*x+b;
+    }
+}
+ 
+ 
+void make_image (int width, int height)
+{
+  int i;
+  int yValue;
+  yValue= ((width/2) + (height/2))-1;
+  make_header(width, height);
+        for (i = 0; i < height; i++)
+    {
+         print_Row(yValue, width, height);
+    }
+}
+ 
+ 
+int main (void)
+{
+  int width;
+  int height;
+  fprintf(stdin,"Enter the width and the height: ");
+  fscanf(stdin, "%d %d", &width, &height);
+  make_image(width, height);
+ 
+ 
+ 
+ 
+ 
+ 
+  return (0);
+}
